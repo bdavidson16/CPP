@@ -1,0 +1,230 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Driver {
+    private static ArrayList<Dog> dogList = new ArrayList<Dog>();
+    private static ArrayList<Monkey> monkeyList = new ArrayList<Monkey>();
+
+    public static void main(String[] args) {
+
+    initializeDogList();
+    initializeMonkeyList();
+    
+    Scanner input = new Scanner(System.in); // scanner class object
+    char menuOptions;
+    
+    do // loop displaying menu, I did a do while loop because unless q is inputed
+      // the program continues to run
+    {
+        displayMenu();
+        menuOptions = input.next().charAt(0);
+        if (menuOptions == '1') { // intakeNewDog method is called
+            intakeNewDog(input);
+        }
+        
+        else if (menuOptions == '2') { // intakeNewMonkey method is called
+            intakeNewMonkey(input);
+        }
+        
+        else if (menuOptions == '3') { // reserveAnimal method is called
+            reserveAnimal(input);
+        }
+        
+        else if (menuOptions == '4') { // printAnimals method is called to print the dog list
+            printAnimals(menuOptions);
+        }
+        
+        else if (menuOptions == '5') { // printAnimals method is called to print the monkey list
+            printAnimals(menuOptions);
+        }
+        
+        else if (menuOptions == '6') { // printAnimals method is called to print all available animals
+            printAnimals(menuOptions);
+        }
+        
+        else if (option == 'q') { // quit message prints and application quits
+            System.out.print("You have quit the application.");
+            break;
+        }
+        
+        else { // if invalid input, it prints error message user and asks for a new input
+            System.out.print("You have entered an invalid input. Please enter a valid input.");
+        }
+    }
+    while (option != 'q');
+}
+
+// This method prints the menu options
+public static void displayMenu() {
+    System.out.println("\n\n");
+    System.out.println("\t\t\t\tRescue Animal System Menu");
+    System.out.println("[1] Intake a new dog");
+    System.out.println("[2] Intake a new monkey");
+    System.out.println("[3] Reserve an animal");
+    System.out.println("[4] Print a list of all dogs");
+    System.out.println("[5] Print a list of all monkeys");
+    System.out.println("[6] Print a list of all animals that are not reserved");
+    System.out.println("[q] Quit application");
+    System.out.println();
+    System.out.println("Enter a menu selection");
+}
+
+
+// Adds dogs to a list for testing
+public static void initializeDogList() {
+    Dog newDog1 = new Dog("Spot", "German Shepherd", "male", "1", "25.6", "05-12-2019", "United States", "intake", false, "United States");
+    Dog newDog2 = new Dog("Rex", "Great Dane", "male", "3", "35.2", "02-03-2020", "United States", "Phase I", false, "United States");
+    Dog newDog3 = new Dog("Bella", "Chihuahua", "female", "4", "25.6", "12-12-2019", "Canada", "in service", true, "Canada");
+
+    dogList.add(newDog1);
+    dogList.add(newDog2);
+    dogList.add(newDog3);
+}
+
+
+// Adds monkeys to a list for testing
+public static void initializeMonkeyList() {
+    Monkey newMonkey1 = new Monkey("James", "Capuchin", "1.00", "8.20", 9.20", "male", "8", "42", "01-30-2023", "United States", "in service", false, "United States");
+    
+    monkeyList.add(newMonkey1);
+}
+
+// this method asks for information to see if the dog is returning or new
+public static void intakeNewDog(Scanner scanner) {
+    System.out.println("What is the dog's name?");
+    String name = scanner.nextLine();
+    for(Dog dog: dogList) {
+        if(dog.getName().equalsIgnoreCase(name)) {
+            System.out.println("\n\nThis dog is already in our system\n\n");
+            return; // returns to menu
+        }
+    }
+
+// if the dog is new, then these questions gather information to input a new dog in the system
+    System.out.println("What is the dog's breed?");
+    String breed = scanner.nextLine();
+    System.out.println("What is the dog's gender?");
+    String gender = scanner.nextLine();
+    System.out.println("What is the dog's age?");
+    String age = scanner.nextLine();
+    System.out.println("What is the dog's weight?");
+    String weight = scanner.nextLine();
+    System.out.println("What is the dog's acquisition date?");
+    String acquisitionDate = scanner.nextLine();
+    System.out.println("What is the dog's acquisition country?");
+    String acquisitionCountry = scanner.nextLine();
+    System.out.println("What is the dog's training status?");
+    String trainingStatus = scanner.nextLine();
+    System.out.println("Is this dog reserved?");
+    boolean reserved = scanner.nextBoolean();
+    scanner.nextLine();
+    System.out.println("Which country is the dog in service?");
+    String inServiceCountry = scanner.nextLine();
+
+// then the dog is added to the array list and its prompts the user that this was completed
+    Dog newDog = new Dog(name, breed, gender, age, weight, acquisitionDate, acquisitionCountry, trainingStatus, reserved, inServiceCountry);
+    dogList.add(newDog);
+    System.out.println("Your new dog has been added to the list.");
+}
+
+// this method asks for information to see if the monkey is returning or new
+    public static void intakeNewMonkey(Scanner scanner) {
+        System.out.println("What is the monkey's name?");
+        String name = scanner.nextLine();
+        for (Monkey monkey: monkeyList) {
+            if (monkey.getName().equalsIgnoreCase(name)) {
+                System.out.println("\n\nThis monkey is already in our system\n\n");
+                return;
+        }
+    }
+// if the monkey is new, then these questions gather information to input a new monkey in the system        
+    System.out.println("What is the monkey's gender?");
+    String gender = scanner.nextLine();
+    System.out.println("What is the monkey's age?");
+    String age = scanner.nextLine();
+    System.out.println("What is the monkey's weight?");
+    String weight = scanner.nextLine();
+    System.out.println("What is the monkey's acquisition date?");
+    String acquisitionDate = scanner.nextLine();
+    System.out.println("What is the monkey's acquisition country?");
+    String acquisitionCountry = scanner.nextLine();
+    System.out.println("What is the monkey's training status?");
+    String trainingStatus = scanner.nextLine();
+    System.out.println("Is this monkey reserved?");
+    boolean reserved = scanner.nextBoolean();
+    System.out.println("Which country is the monkey in service?");
+    String inServiceCountry = scanner.nextLine();
+    System.out.println("What is the monkey's species?");
+    String species = scanner.nextLine();
+    System.out.println("What is the tail length?");
+    String tailLength = scanner.nextLine();
+    System.out.println("What is the height?");
+    String height = scanner.nextLine();
+    System.out.println("What is the body length?");
+    String bodyLength = scanner.nextLine();
+
+// then the monkey is added to the array list and its prompts the user that this was completed
+    Monkey newMonkey = new Monkey(name, gender, age, weight, acquisitionDate, acquisitionCountry, trainingStatus, reserved, inServiceCountry, species, tailLength, height, bodyLength);
+    monkeyList.add(newMonkey);
+    System.out.println("Your new monkey hass been added to the list.");
+    }
+
+    public static void reserveAnimal(Scanner scanner) {
+        scanner.nextLine();
+        System.out.println("Please enter the animal's type: ");
+        String animalType = scanner.nextLine();
+    // if the animal is a monkey, the program goes through the dog list by country
+        if (animalType.equalsIgnoreCase("monkey")) {
+            System.out.println("Please enter the monkey's acquisition country: ");
+            String country = scanner.nextLine();
+            for (Monkey obj: monkeyList) {
+                if (obj.getAcquisitionLocation().equalsIgnoreCase(country)) {
+                    obj.setReserved(true);
+                    System.out.println("This monkey is now reserved.");
+                    return;
+                }
+            }
+          //if the corresponding monkey is not found an error message will print out
+            System.out.println("The monkey entered is not in the list and cannot be reserved.");
+        }
+    // else if the animal is a dog, the program goes through the dog list by country
+        else if (animalType.equalsIgnoreCase("dog")) {
+            System.out.println("Please enter the dog's acquisition country: ");
+            String country = scanner.nextLine();
+            for (Dog obj: dogList) {
+                if (obj.getAcquisitionLocation().equalsIgnoreCase(country)) {
+                    obj.setReserved(true);
+                    System.out.println("This dog is now reserved.");
+                    return;
+                }
+            }
+          //if the corresponding dog is not found an error message will print out
+            System.out.println("The dog entered is not in the list and cannot be reserved.");
+        }
+    //if the animal type is invalid, a error message will print
+        else {
+            System.out.println("Animal type not found.");
+        }
+    }
+
+//this prints out a list based on the input of do while loop created, either the dog list prints
+// or the monkey list, or all the animals if they are in service and not reserved
+    public static void printAnimals(char menuOptions) {
+        if (option == '4') {
+            System.out.println(dogList);
+        }
+        else if (option == '5') {
+            System.out.println(monkeyList);
+        }
+        else if (option == '6') {
+            for (int i = 0; i < dogList.size(); i++) {
+                if (dogList.get(i).getTrainingStatus().equals("in service") && dogList.get(i).getReserved()==false) {
+                    System.out.println(dogList.get(i));
+                }
+            }
+            for (int i = 0; i < monkeyList.size(); i++) {
+                if (monkeyList.get(i).getTrainingStatus().equals("in service") && monkeyList.get(i).getReserved()==false) {
+                    System.out.println(monkeyList.get(i));
+                }
+            }
+        }
